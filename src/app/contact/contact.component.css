@@ -1,0 +1,36 @@
+/* Table Styling */
+.table th, .table td {
+    text-align: center;
+    vertical-align: middle;
+    padding: 12px;
+}
+
+/* Fix column spacing */
+.table th {
+    white-space: nowrap;
+}
+
+/* Highlight row hover effect */
+.table-hover tbody tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* Buttons styling */
+.btn {
+    border-radius: 8px;
+    margin-right: 10px; /* Add space between buttons */
+}
+
+/* Card styling */
+.card {
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+/* Modal shadow */
+.modal-content {
+    border-radius: 15px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+

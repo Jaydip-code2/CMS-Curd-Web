@@ -1,0 +1,84 @@
+<div class="container mt-4">
+    <h2 class="text-center text-primary fw-bold">📞 Contact Management</h2>
+
+    <!-- Search Bar -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <input type="text" class="form-control w-50" placeholder="🔍 Search contacts..." (input)="searchContacts($event)">
+        <button class="btn btn-primary shadow-sm" (click)="openModal()">
+            <i class="bi bi-person-plus-fill"></i> Add Contact
+        </button>
+    </div>
+
+    <!-- Contact List -->
+    <div class="card shadow-lg border-0">
+        <div class="card-body p-0">
+            <table class="table table-hover align-middle">
+                <thead class="table-primary">
+                    <tr>
+                        <th>#</th>
+                        <th><i class="bi bi-person-circle"></i> Name</th>
+                        <th><i class="bi bi-telephone"></i> Phone</th>
+                        <th><i class="bi bi-envelope"></i> Email</th>
+                        <th class="text-center"><i class="bi bi-gear"></i> Actions</th>
+                    </tr>
+                </thead>
+                <tbody *ngIf="filteredContacts.length > 0; else noContacts">
+                    <tr *ngFor="let contact of filteredContacts; let i = index">
+                        <td>{{ i + 1 }}</td>
+                        <td>{{ contact.name }}</td>
+                        <td>{{ contact.phone }}</td>
+                        <td>{{ contact.email }}</td>
+                        <td class="text-center">
+                            <button class="btn btn-warning btn-sm me-2 shadow-sm" (click)="editContact(contact)">
+                                <i class="bi bi-pencil-square"></i>
+                            </button>
+                            <button class="btn btn-danger btn-sm shadow-sm" (click)="deleteContact(contact.id)">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <ng-template #noContacts>
+                <div class="text-center p-4">
+                    <i class="bi bi-emoji-frown fs-1 text-secondary"></i>
+                    <h5 class="text-secondary">No Contacts Found</h5>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>
+
+<!-- Contact Form Modal -->
+<div class="modal fade" id="contactModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content shadow-lg">
+            <div class="modal-header bg-primary text-white">
+                <h5 class="modal-title fw-bold">{{ isEditMode ? '✏️ Edit Contact' : '➕ Add Contact' }}</h5>
+                <button type="button" class="btn-close text-white" (click)="closeModal()"></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="contactForm" (ngSubmit)="saveContact()">
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input type="text" class="form-control" formControlName="name">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Phone</label>
+                        <input type="text" class="form-control" formControlName="phone">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" class="form-control" formControlName="email">
+                    </div>
+                    <div class="text-end">
+                        <button type="button" class="btn btn-secondary shadow-sm" (click)="closeModal()">Cancel</button>
+                        <button type="submit" class="btn btn-success shadow-sm" [disabled]="contactForm.invalid">
+                            <i class="bi bi-save"></i> {{ isEditMode ? 'Update' : 'Save' }}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
