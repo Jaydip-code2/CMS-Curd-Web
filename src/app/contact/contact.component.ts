@@ -43,7 +43,7 @@ export class ContactComponent implements OnInit {
   loadContacts() {
     this.contactService.getContacts().subscribe((data) => {
       this.contacts = data;
-      this.filteredContacts = [...this.contacts]; // ✅ Ensure filteredContacts is updated
+      this.filteredContacts = [...this.contacts]; //  Ensure filteredContacts is updated
     });
   }
 
